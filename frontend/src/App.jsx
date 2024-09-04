@@ -16,6 +16,7 @@ import UserSearchResults from "./Pages/UserSearchResults";
 import AdminPage from './Pages/AdminPage';
 import AdminLoginPage from "./Pages/AdminLoginPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Category from './Pages/Category';
 
 const App = () => {
   
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
         <Route path="/search-results" element={<SearchResults/>}/>
         <Route path='/product-details/:id' element={<PublicProductDetails/>}/>
+        <Route path="/category" element={<Category />} />
         </Route>
 
         {/*Routes for logged user */}

@@ -29,6 +29,7 @@ const PublicProductDetails = () => {
         try {
           const response = await axios.get(`http://localhost:8080/users/profile/${userId}`);
           setUser(response.data);
+          console.log(response.data)
         } catch (error) {
           console.error("Failed to fetch user", error);
         }
@@ -112,6 +113,8 @@ const PublicProductDetails = () => {
                   className="w-96 h-96 object-cover rounded-lg"
                 />
               </div>
+              
+
             </div>
           ) : (
             <p>Product not found.</p>
@@ -119,9 +122,13 @@ const PublicProductDetails = () => {
 
           {user ? (
             <span>Posted by: {user.username}</span>
+            
+
           ) : (
             <p>User not found.</p>
+            
           )
+          
         }
         </div>
         

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const productModel = require('../Models/productModel');
+const productModel = require('../models/productModel');
 
 router.post('/create-product', async (req, res) => {
 
@@ -33,7 +33,7 @@ router.put('/update-product/:id', async (req, res) => {
 
         const updateProduct = await productModel.findByIdAndUpdate(id, updateData);
         if(!updateProduct) return res.status(400).send("Fail to update.");
-
+        
         const updatedProduct = await productModel.findById(id);
         res.status(200).send(updatedProduct);
         console.log("Updated!")
