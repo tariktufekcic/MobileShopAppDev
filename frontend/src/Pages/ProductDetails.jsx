@@ -11,30 +11,21 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [sold, setSold] = useState(false); // Dodaj status 'sold'
+  const [isOwner, setIsOwner] = useState(false); // Dodaj status za provjeru vlasništva
 
-  const { id, userId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUser = async (userId) => {
-      try {
-        const userResponse = await axios.get(`http://localhost:8080/users/profile/${userId}`);
-        setUser(userResponse.data);
-      } catch (error) {
-        console.error('There was an error fetching the user or products data!', error);
-      }
-    };
-
-    if (userId) {
-      fetchUser(userId);
-    }
-  }, [userId]);
+  
+  const currentUserId = localStorage.getItem('userId'); // Preuzmi userId iz localStorage
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
+        // Preuzmi detalje proizvoda zajedno s korisničkim informacijama
         const response = await axios.get(`http://localhost:8080/products/single-product/${id}`);
-        setProduct(response.data);
+        const productData = response.data;
+        setProduct(productData);
+        setUser(productData.userId); // Postavi korisnika iz podataka proizvoda
 
         // Provjeri da li je neka ponuda prihvaćena
         const offersResponse = await axios.get(`http://localhost:8080/of/offers/${id}`);
@@ -43,41 +34,45 @@ const ProductDetails = () => {
           setSold(true);
         }
 
-        if (response.data.userId) {
-          setUser(response.data.userId);
+        // Provjeri da li trenutni korisnik posjeduje proizvod
+        if (productData.userId._id === currentUserId) {
+          setIsOwner(true); // Postavi isOwner na true ako je trenutni korisnik vlasnik proizvoda
         }
-      } catch {
-        console.log("Error");
+      } catch (error) {
+        console.log("Error:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchProductDetails();
-  }, [id, userId]);
+  }, [id, currentUserId]);
 
   const handleDeleteProduct = async (id) => {
+    if (!isOwner) {
+      alert("You cannot delete this product");
+      return;
+    }
+  
     try {
       await axios.delete(`http://localhost:8080/products/delete-product/${id}`);
       alert("Product has been deleted!");
-      if (userId) {
-        navigate(-1);
-      }
+      navigate(-1);
     } catch (e) {
-      console.error("FAIL");
+      console.error("Failed to delete product", e);
     }
   };
-
+  
   const handleUpdateProduct = async (id) => {
+    if (!isOwner) {
+      alert("You cannot edit this product");
+      return;
+    }
+  
     try {
-      const response = await axios.get(`http://localhost:8080/products/single-product/${id}`);
-      if (response.data) {
-        navigate(`/user-products/${userId}/update-product/${id}`);
-      } else {
-        console.log("Error");
-      }
+      navigate(`/user-products/${currentUserId}/update-product/${id}`);
     } catch (error) {
-      console.error("Error Message");
+      console.error("Failed to navigate to update page", error);
     }
   };
 
@@ -145,20 +140,24 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="mt-6">
-              <button
-                onClick={() => handleDeleteProduct(product._id)}
-                className="w-36 h-10 hover:bg-red-800 text-white border-2 rounded-lg bg-red-600"
-                style={{fontSize: '14px'}}
-              >
-                <DeleteIcon />Delete Product
-              </button>
-              <button
-                onClick={() => handleUpdateProduct(product._id)}
-                className="bg-green-600 text-white hover:bg-green-800 h-10 w-36 rounded-lg ml-4"
-                style={{fontSize: '14px'}}
-              >
-                <UpdateIcon />Update Product
-              </button>
+              {isOwner && (
+                <>
+                  <button
+                    onClick={() => handleDeleteProduct(product._id)}
+                    className="w-36 h-10 hover:bg-red-800 text-white border-2 rounded-lg bg-red-600"
+                    style={{fontSize: '14px'}}
+                  >
+                    <DeleteIcon /> Delete Product
+                  </button>
+                  <button
+                    onClick={() => handleUpdateProduct(product._id)}
+                    className="bg-green-600 text-white hover:bg-green-800 h-10 w-36 rounded-lg ml-4"
+                    style={{fontSize: '14px'}}
+                  >
+                    <UpdateIcon /> Update Product
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
@@ -171,7 +170,12 @@ const ProductDetails = () => {
           </div>
 
           {user ? (
-            <span className="text-lg font-semibold">Posted by: {user.username}</span>
+            <div>
+              <div className="w-12 h-12 rounded-full bg-gray-300 text-white flex items-center justify-center text-xl font-bold">
+                {user.username.charAt(0)}
+              </div>
+              <span className="text-lg font-thin">{user.username}</span>
+            </div>
           ) : (
             <p className="text-lg font-semibold">User not found.</p>
           )}

@@ -76,17 +76,24 @@ const Profile = () => {
   </button>
 </div>
         
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          {user ? (
-            <div className='flex flex-col items-start'>
-              <h2 className='text-3xl font-bold text-gray-800'>{user.username}</h2>
-              <p className='mt-2 text-gray-600'>{user.username}'s profile</p>
-            </div>
-            
-          ) : (
-            <p>Loading user data...</p>
-          )}
+<div className="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-4">
+  {user ? (
+    <div className="flex flex-col items-start">
+      <div className="flex items-center space-x-4">
+        <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+          <span className="text-2xl font-bold text-gray-600">{user.username[0]}</span>
         </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-800">{user.username}</h2>
+          <p className="text-gray-600">{user.username}'s profile</p>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <p className="text-gray-600">Loading user data...</p>
+  )}
+</div>
+
 
         <div className="mt-8">
         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleDelete}>

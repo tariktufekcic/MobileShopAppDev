@@ -7,10 +7,12 @@ const AdminRouter = require('./AdminRouter');
 const categoryRouter = require('./categoryRouter')
 const offerRouter = require('./offerRouter');
 
+
 router.use('/users', userRouter);
 router.use('/products', productRouter);
 router.use('/auth', AuthRouter);
 router.use('/admin', AdminRouter);
 router.use('/cat', categoryRouter);
-router.use('/of', offerRouter)
+router.use('/of', offerRouter);
+
 module.exports = router;

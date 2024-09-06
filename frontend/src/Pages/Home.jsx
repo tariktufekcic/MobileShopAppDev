@@ -17,7 +17,7 @@ const Home = () => {
       } catch (error) {
         console.error("Failed fetching products", error)
       }
-      
+    
     }
     fetchAllProducts();
   }, [id]);

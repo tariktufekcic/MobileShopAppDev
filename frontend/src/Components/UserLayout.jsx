@@ -59,30 +59,30 @@ const UserLayout = () => {
       {/* Navbar */}
       <header className="bg-gray-500 text-white p-4 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">Mobile Shop</h1>
+          <h1 className="text-xl font-bold">Mob Shop</h1>
           <nav className="flex space-x-4 gap-4 items-center">
             <div className="flex flex-row w-3/6 justify-center relative">
-              <input
-                className="shadow appearance-none border rounded-2xl text-black h-10 p-4 w-full focus:outline-none pl-9"
-                  type="search"
-                    placeholder="Search product"
-                      value={searchTerm} 
-                        onChange={(e) => setSearchTerm(e.target.value)} 
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              handleSearchClick(); 
+             <input
+                className="shadow-md appearance-none border rounded-full text-black h-12 px-6 w-full focus:outline-none pl-12"
+                type="search"
+                placeholder="Search product"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearchClick();
                   }
                 }}
               />
               <FaSearch
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
-                  onClick={handleSearchClick} 
-                    />
-                       </div>
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                onClick={handleSearchClick}
+              />
+            </div>
             {userId && (
               <>
                 <Link to={`/a/${userId}`} className="hover:underline">Home</Link>
-                <Link to={`/a/profile/${userId}`} className="hover:underline whitespace-nowrap">{username ? `${username}` : ''}'s Profile</Link>
+                <Link to={`/a/profile/${userId}`} className="hover:underline whitespace-nowrap">{username ? `${username}` : ''}'s profile</Link>
               </>
             )}
 

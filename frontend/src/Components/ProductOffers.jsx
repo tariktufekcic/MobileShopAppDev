@@ -42,7 +42,7 @@ const ProductOffers = ({ productId, productName }) => {
 
     const handleRejectOffer = async (offerId) => {
         try {
-            await axios.put(`http://localhost:8080/of/offer/${offerId}`, { status: 'Rejected' });
+            await axios.delete(`http://localhost:8080/of/offer/${offerId}`, { status: 'Rejected' });
             alert('Offer rejected');
             setOffers(prevOffers => prevOffers.filter(offer => offer._id !== offerId));
         } catch (error) {

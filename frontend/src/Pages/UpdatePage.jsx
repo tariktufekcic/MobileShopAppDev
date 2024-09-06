@@ -71,7 +71,7 @@ const UpdatePage = () => {
                                 className="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
-    
+        
                         <div>
                             <label className="block text-gray-700 font-medium mb-1">Price:</label>
                             <input 

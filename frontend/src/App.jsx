@@ -17,6 +17,8 @@ import AdminPage from './Pages/AdminPage';
 import AdminLoginPage from "./Pages/AdminLoginPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Category from './Pages/Category';
+import AboutUs from './Components/AboutUs';
+import Contact from './Components/Contact';
 
 const App = () => {
   
@@ -38,6 +40,8 @@ const App = () => {
         <Route path="/search-results" element={<SearchResults/>}/>
         <Route path='/product-details/:id' element={<PublicProductDetails/>}/>
         <Route path="/category" element={<Category />} />
+        <Route path="aboutus" element={<AboutUs/>}/>
+        <Route path="/contact" element={<Contact/>}/>
         </Route>
 
         {/*Routes for logged user */}

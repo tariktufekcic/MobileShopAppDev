@@ -6,7 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 const PublicProductDetails = () => {
     const [loading, setLoading ] = useState(true)
     const [product, setProduct] = useState(null);
-    const [ user, setUser ] = useState({});
     const { userId, id} = useParams();
     
     useEffect(() => {
@@ -24,22 +23,7 @@ const PublicProductDetails = () => {
         fetchProductDetails();
     },[id, userId]);
 
-    useEffect(() => {
-      const fetchUser = async (userId) => {
-        try {
-          const response = await axios.get(`http://localhost:8080/users/profile/${userId}`);
-          setUser(response.data);
-          console.log(response.data)
-        } catch (error) {
-          console.error("Failed to fetch user", error);
-        }
-      };
-      
-      if (product?.userId) {
-        fetchUser(product.userId);
-        
-      }
-    }, [product]);
+    
     
 
     return (
@@ -120,16 +104,7 @@ const PublicProductDetails = () => {
             <p>Product not found.</p>
           )}
 
-          {user ? (
-            <span>Posted by: {user.username}</span>
-            
-
-          ) : (
-            <p>User not found.</p>
-            
-          )
           
-        }
         </div>
         
       );

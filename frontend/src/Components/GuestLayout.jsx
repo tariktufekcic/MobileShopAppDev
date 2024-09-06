@@ -103,7 +103,7 @@ const GuestLayout = () => {
             <header className="w-full bg-gray-300 shadow-md fixed top-0 z-50">
                 <nav className="flex flex-col h-20">
                     <div className="flex items-center justify-between px-6 py-4 bg-gray-300">
-                        <h2 className="text-gray-800 text-2xl font-semibold">Mobile Shop</h2>
+                        <h2 className="text-gray-800 text-2xl font-semibold">Mob Shop</h2>
 
                         <div className="relative flex-1 mx-4">
                             <input
@@ -155,8 +155,8 @@ const GuestLayout = () => {
                     <div className="flex items-center justify-between px-6 bg-gray-200 text-gray-800 h-12">
                         <div className="flex gap-6 text-lg">
                             <Link to="/" className="hover:text-gray-600 transition duration-300">Home</Link>
-                            <Link to="/new" className="hover:text-gray-600 transition duration-300">New</Link>
-                            <Link to="/category" className="hover:text-gray-600 transition duration-300">Category</Link>
+                            <Link to="/aboutus" className="hover:text-gray-600 transition duration-300">About Us</Link>
+                            
                         </div>
 
                         <button
