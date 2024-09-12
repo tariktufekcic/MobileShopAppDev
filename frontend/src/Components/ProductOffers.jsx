@@ -9,7 +9,7 @@ const ProductOffers = ({ productId, productName }) => {
         const fetchOffers = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/of/offers/${productId}`);
-                const filteredOffers = response.data.filter(offer => !offer.isDeleted); // Filtriraj obrisane ponude
+                const filteredOffers = response.data.filter(offer => !offer.isDeleted);
                 if (filteredOffers.length > 0) {
                     setOffers(filteredOffers);
                 }
@@ -60,7 +60,7 @@ const ProductOffers = ({ productId, productName }) => {
     };
     
 
-    // Proveri da li postoje ponude, ako ne, vrati null (ne prikazuje ništa)
+    
     if (offers.length === 0) {
         return null;
     }

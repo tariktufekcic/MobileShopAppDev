@@ -1,5 +1,3 @@
-// components/CreateOffer.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -7,7 +5,7 @@ const CreateOffer = ({ productId }) => {
     const [offerText, setOfferText] = useState('');
 
     const handleSendOffer = async () => {
-        const userId = localStorage.getItem('userId'); // Pretpostavljam da čuvate userId u localStorage
+        const userId = localStorage.getItem('userId');
     
         try {
             await axios.post('http://localhost:8080/of/create-offer', { productId, userId, offerText });

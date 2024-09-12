@@ -11,15 +11,15 @@ const GuestLayout = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation(); // useLocation for tracking URL
+    const location = useLocation();
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        // Fetch past searchTerm
+        
         const term = localStorage.getItem('searchTerm');
             setSearchTerm(term || '');
 
-        // Fetch product from API
+        
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/products/all-products');
@@ -33,7 +33,7 @@ const GuestLayout = () => {
     }, []);
 
     useEffect(() => {
-        // Filtering products
+        
         if (searchTerm) {
             const filtered = products.filter(product =>
                 product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -47,7 +47,7 @@ const GuestLayout = () => {
     }, [searchTerm, products]);
 
     useEffect(() => {
-        // Close dropdown menu when clicked outside
+        
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setShowDropdown(false);
@@ -62,7 +62,7 @@ const GuestLayout = () => {
     }, []);
 
     useEffect(() => {
-        // Clear searchTerm
+        
         if (location.pathname === '/') {
             setSearchTerm('');
             localStorage.removeItem('searchTerm');
@@ -91,7 +91,7 @@ const GuestLayout = () => {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-            // On enter start search
+            
             if (filteredProducts.length > 0) {
                 handleDropdownClick(filteredProducts[0]); 
             }

@@ -14,22 +14,22 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserProductsAndOffers = async () => {
         try {
-            // Fetch user details
+            
             const userResponse = await axios.get(`http://localhost:8080/users/profile/${userId}`);
             setUser(userResponse.data);
 
-            // Fetch products for the user
+            
             const productsResponse = await axios.get(`http://localhost:8080/products/user-products/${userId}`);
             const fetchedProducts = productsResponse.data;
             setProducts(fetchedProducts);
 
-            // Fetch offers for each product
+            
             const offersPromises = fetchedProducts.map(product => 
                 axios.get(`http://localhost:8080/of/offers/${product._id}`)
             );
 
             const offersResponses = await Promise.all(offersPromises);
-            const allOffers = offersResponses.map(response => response.data).flat(); // Flatten the array of offers
+            const allOffers = offersResponses.map(response => response.data).flat();
             setOffers(allOffers);
         } catch (error) {
             console.error('There was an error fetching the data!', error);
@@ -130,7 +130,7 @@ const Profile = () => {
             <p>No Products</p>
           )}
         </div>
-        {/* Add the ProductOffers component here */}
+        
 <div className="mt-8">
   {products.map(product => (
     <ProductOffers key={product._id} productId={product._id} productName={product.name}/>

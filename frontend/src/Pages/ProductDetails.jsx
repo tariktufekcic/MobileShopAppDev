@@ -10,33 +10,33 @@ const ProductDetails = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
-  const [sold, setSold] = useState(false); // Dodaj status 'sold'
-  const [isOwner, setIsOwner] = useState(false); // Dodaj status za provjeru vlasništva
+  const [sold, setSold] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
   
-  const currentUserId = localStorage.getItem('userId'); // Preuzmi userId iz localStorage
+  const currentUserId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        // Preuzmi detalje proizvoda zajedno s korisničkim informacijama
+        
         const response = await axios.get(`http://localhost:8080/products/single-product/${id}`);
         const productData = response.data;
         setProduct(productData);
-        setUser(productData.userId); // Postavi korisnika iz podataka proizvoda
+        setUser(productData.userId);
 
-        // Provjeri da li je neka ponuda prihvaćena
+        
         const offersResponse = await axios.get(`http://localhost:8080/of/offers/${id}`);
         const acceptedOffer = offersResponse.data.find(offer => offer.status === 'Accepted');
         if (acceptedOffer) {
           setSold(true);
         }
 
-        // Provjeri da li trenutni korisnik posjeduje proizvod
+        
         if (productData.userId._id === currentUserId) {
-          setIsOwner(true); // Postavi isOwner na true ako je trenutni korisnik vlasnik proizvoda
+          setIsOwner(true);
         }
       } catch (error) {
         console.log("Error:", error);

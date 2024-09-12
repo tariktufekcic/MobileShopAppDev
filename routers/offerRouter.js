@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Offer = require('../models/offerModel');
-const productModel = require('../models/productModel'); // Provjerite da li je putanja tačna
+const productModel = require('../models/productModel');
 
-// Kreiraj ponudu
+
 router.post('/create-offer', async (req, res) => {
     const { productId, userId, offerText } = req.body;
 
@@ -20,7 +20,7 @@ router.post('/create-offer', async (req, res) => {
     }
 });
 
-// Prikaz ponuda za vlasnika
+
 router.get('/offers/:productId', async (req, res) => {
     const { productId } = req.params;
 
@@ -32,10 +32,10 @@ router.get('/offers/:productId', async (req, res) => {
     }
 });
 
-// Prihvatanje ili odbijanje ponude
+
 router.put('/offer/:offerId', async (req, res) => {
     const { offerId } = req.params;
-    const { status } = req.body; // status može biti 'Accepted' ili 'Rejected'
+    const { status } = req.body;
 
     try {
         const offer = await Offer.findByIdAndUpdate(offerId, { status }, { new: true });
@@ -47,7 +47,7 @@ router.put('/offer/:offerId', async (req, res) => {
     }
 });
 
-// DELETE ruta za brisanje ponude
+
 router.delete('/offer/:offerId', async (req, res) => {
     try {
         await Offer.findByIdAndDelete(req.params.offerId);

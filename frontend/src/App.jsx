@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/registration" element={<Register/>}/>
         <Route path="*" element={<h2>404 Page Not Found</h2>}/>
         
-        {/*Public Routes*/}
+        {/*Public*/}
           <Route path="/" element={<GuestLayout/>}>
         <Route path="/" element={<Home/>} />
         <Route path="/admin/login" element={<AdminLoginPage/>}/>
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/contact" element={<Contact/>}/>
         </Route>
 
-        {/*Routes for logged user */}
+        {/*Logged users */}
             <Route path="/" element={<UserLayout/>}>
             
         <Route path='/a/:userId' element={<ProtectedRoute><UserHomePage/></ProtectedRoute>}/>

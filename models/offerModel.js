@@ -1,5 +1,3 @@
-// Models/offerModel.js
-
 const mongoose = require('mongoose');
 
 const offerSchema = new mongoose.Schema({

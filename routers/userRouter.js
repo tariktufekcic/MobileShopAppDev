@@ -48,23 +48,23 @@ router.get("/profile/:userId", async (req, res) => {
     }
     });
 
-    // Ruta za dobavljanje informacija o trenutnom korisniku
+    
 router.get('/me', async (req, res) => {
     try {
-        // Dobijanje tokena iz zaglavlja zahteva
+        
         const token = req.header('Authorization').replace('Bearer ', '');
         
-        // Verifikacija tokena
+        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-        // Pronalaženje korisnika na osnovu ID-a iz tokena
+        
         const user = await User.findById(decoded.userId);
         
         if (!user) {
             return res.status(404).send({ error: 'User not found' });
         }
 
-        // Vraćanje podataka o korisniku
+        
         res.send(user);
     } catch (error) {
         res.status(401).send({ error: 'Please authenticate' });

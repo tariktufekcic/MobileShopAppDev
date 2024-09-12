@@ -1,7 +1,5 @@
-// seedBrands.js
-
 const mongoose = require('mongoose');
-const Brand = require('../models/brandModel'); // Putanja do vašeg brandModela
+const Brand = require('../models/brandModel');
 
 const brands = [
     { name: 'Samsung' },
@@ -17,7 +15,7 @@ const seedBrands = async () => {
     try {
         await mongoose.connect('mongodb+srv://trktfkcc:PowQB3pqWtdmsKxW@cluster1.3qezmjj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1', { useNewUrlParser: true, useUnifiedTopology: true });
         
-        await Brand.deleteMany({}); // Brisanje svih postojećih brendova (opcionalno)
+        await Brand.deleteMany({});
         
         await Brand.insertMany(brands);
         
