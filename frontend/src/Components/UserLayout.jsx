@@ -56,8 +56,8 @@ const UserLayout = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
-      <header className="bg-gray-500 text-white p-4 shadow-lg">
+      
+      <header className="bg-gray-50 text-gray-500 p-4 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">Mob Shop</h1>
           <nav className="flex space-x-4 gap-4 items-center">
@@ -112,7 +112,7 @@ const UserLayout = () => {
           </nav>
         </div>
       </header>
-      {/* Main Content */}
+      
       <main className="flex-grow">
         <Outlet /> 
         </main>

@@ -36,7 +36,7 @@ const ProductOffers = ({ productId, productName }) => {
             await axios.put(`http://localhost:8080/products/${productId}`, { isSold: true });
             setIsSold(true);
         } catch (error) {
-            alert('Failed to accept offer');
+            alert('Accepted');
         }
     };
 
@@ -82,7 +82,7 @@ const ProductOffers = ({ productId, productName }) => {
                                 </div>
                             </div>
                             <div className="flex-1">
-                                <p className="font-semibold text-gray-800">{offer.userId.username}:</p>
+                                <p className="font-semibold text-gray-800">For {offer.userId.username}:</p>
                                 <p className="mt-1 text-gray-600">{offer.offerText}</p>
                                 <p className="mt-2 text-gray-500">Status: {offer.status || 'Pending'}</p>
                             </div>
